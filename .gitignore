@@ -1,0 +1,8 @@
+# dir
+build
+frontend/dist
+frontend/node_modules
+log
+
+# file
+pnpm-lock.yaml

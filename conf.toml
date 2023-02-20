@@ -1,0 +1,26 @@
+[Window]
+  Width = 1000
+  Height = 600
+
+[Ws]
+  ServerPort = 60200
+  HeartbeatSeconds = 10
+
+[Socket]
+  ServerPort = 60100
+  HeartbeatSeconds = 10
+  ServerBufferSize = 4096
+  DataTail = [9, 9, 9]
+
+[Zap]
+  Director = "./log"
+  FileNamePrefix = ""
+  Prefix = ""
+  StacktraceKey = ""
+  ShowLine = true
+  ShowCaller = true
+  LogInConsole = true
+  Format = "txt"
+  EncodeLevel = "LowercaseColorLevelEncoder"
+
+[ClientSettingMap]
