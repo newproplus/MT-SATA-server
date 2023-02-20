@@ -14,6 +14,9 @@ Semi-automatic trading assistant server for metatrader.
 * frontend:
   * typeScript: programming language
   * vuejs: A progressive JavaScript framework.
+* communication:
+  * use socket with metatrader
+  * use web socket with frontend
 
 ## Develop
 

@@ -19,14 +19,14 @@ func NewApp() *App {
 func (a *App) Startup(ctx context.Context) {
 	a.ctx = ctx
 
-	Init()
-
-	var WsServer StWsServer
-	go WsServer.Start()
+	// Start non-GUI functions.
+	Init()	
 
 	var SocketServer StSocketServer
 	go SocketServer.Start()
 
+	var WsServer StWsServer
+	go WsServer.Start()
 	WsServer.MonitorChToWs()
 }
 
