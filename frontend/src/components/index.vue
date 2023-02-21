@@ -2,6 +2,7 @@
 
 import { ref } from "vue";
 import { strArr, strNumObj, strBoolObj } from "@/types"
+import { sortObjectByValue } from "@/utils/object"
 
 import { XGetSymbolSettings, XGetWsBasicInfo, XSaveSymbolSettings, XDeleteClient } from "../../wailsjs/go/backend/App";
 import { backend } from "../../wailsjs/go/models";
@@ -26,7 +27,7 @@ const ActSvrSetIndicator = 541
 // ========== actions end ==========
 
 const timeframeMap = ref<strNumObj>({})
-const priceTypeMap = ref<strNumObj>({})
+const appliedPriceMap = ref<strNumObj>({})
 const indNameArr = ref<strArr>([])
 const clientStatusMap = ref<strBoolObj>({})
 
@@ -40,7 +41,7 @@ const indParam = ref<backend.StIndParam>({
   indName: "",
   timeframe: 0,
   period: 0,
-  priceType: 0,
+  appliedPrice: 0,
   upLine: 0,
   downLine: 0,
 })
@@ -53,7 +54,6 @@ const priceRange = ref<backend.StPriceRange>({
   shortMax: 0,
 })
 
-
 let wsConn: WebSocket;
 const wsConnOk = ref(false)
 const wsPort = ref(0)
@@ -65,7 +65,7 @@ const getBasicInfo = async () => {
     indNameArr.value = basic.indNameArr
     clientStatusMap.value = basic.clientStatusMap
     timeframeMap.value = basic.timeframeMap
-    priceTypeMap.value = basic.priceTypeMap
+    appliedPriceMap.value = basic.appliedPriceMap
     emptytStrSign.value = basic.emptytStrSign
 
     wsPort.value = basic.wsPort
@@ -183,11 +183,11 @@ const getSymbolSettings = async (symbol: string) => {
   })
 }
 
-const saveSymbolSettings = () => {
+const onSaveSymbolSettings = () => {
   XSaveSymbolSettings(currentSymbol.value, indParam.value, priceRange.value)
 }
 
-const deleteSymbol = async (symbol: string) => {
+const onDeleteSymbol = async (symbol: string) => {
   var msg = `Confirm to delete client"${symbol}"?`;
   if (confirm(msg)) {
     XDeleteClient(symbol)
@@ -195,7 +195,7 @@ const deleteSymbol = async (symbol: string) => {
 }
 
 const terminalData = ref(false)
-const toggleTerminal = () => {
+const onToggleTerminal = () => {
   terminalData.value = !terminalData.value
 }
 // ========== symbol end ==========
@@ -210,7 +210,7 @@ const toggleTerminal = () => {
         <h4 class="symbol py-1" v-if="typeof i === 'string'">
           <span class="status-block" :class="v ? 'ok' : 'err'"></span>
           <span :class="i === currentSymbol ? 'current' : ''" @click="onChangeSymbol(i)"> {{ i }}</span>
-          <span class="delete-symbol" @click="deleteSymbol(i)">X</span>
+          <span class="delete-symbol" @click="onDeleteSymbol(i)">❎</span>
         </h4>
       </template>
     </div>
@@ -218,9 +218,9 @@ const toggleTerminal = () => {
       <h2>Setting of {{ currentSymbol }}</h2>
 
       <div class="apply-block">
-        <button class="px-2" @click="saveSymbolSettings()">Apply</button>
+        <button class="px-2" @click="onSaveSymbolSettings()">Apply</button>
         <span class="gap-x2"></span>
-        <button class="px-2" @click="toggleTerminal()">Toggle terminal data</button>
+        <button class="px-2" @click="onToggleTerminal()">Toggle terminal data</button>
       </div>
 
       <div>
@@ -236,15 +236,15 @@ const toggleTerminal = () => {
           <input type="number" placeholder="Down line" v-model="indParam.downLine" class="w-4rem" />
         </p>
         <p>
-          <span class="disp-inline-block w-8rem">Price type:</span>
-          <select v-model="indParam.priceType">
-            <option v-for="v, k in priceTypeMap" :value="v">{{ k }}</option>
+          <span class="disp-inline-block w-8rem">Applied price:</span>
+          <select v-model="indParam.appliedPrice">
+            <option v-for="v, k in appliedPriceMap" :value="v">{{ k }}</option>
           </select>
         </p>
         <p>
           <span class="disp-inline-block w-8rem">Timeframe:</span>
           <select v-model="indParam.timeframe" class="w-8rem">
-            <option v-for="v, k in timeframeMap" :value="v">{{ k }}</option>
+            <option v-for="v, k in sortObjectByValue(timeframeMap)" :value="v[1]">{{ v[0] }}</option>
           </select>
           <span class="px-2">Period:</span>
           <input v-model.number="indParam.period" type="number" class="w-4rem" />
@@ -358,7 +358,7 @@ $leftWidth: 240px;
         background-color: #290885;
         height: 8rem;
         width: 100%;
-        // word-break: break-all;
+        word-break: break-all;
       }
     }
   }

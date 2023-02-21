@@ -19,7 +19,7 @@ func (self *StSocketServer) Start() {
 	if err != nil {
 		Logger.Error("socketServer Listen error:", zap.Error(err))
 	}
-	fmt.Println("TCP server started, port:" + portStr)
+	fmt.Println(">>> TCP server started, port:" + portStr)
 
 	for {
 		conn, err := server.Accept()
@@ -69,7 +69,7 @@ func (self *StSocketServer) ProcessJson(conn *net.Conn, inByte []byte, inStr str
 	}
 
 	if inData.Action != ActClientHeartbeat {
-		fmt.Printf("socket received(not heartbeat): `%v`\n", inStr)
+		fmt.Printf(">>> socket received(not heartbeat): `%v`\n", inStr)
 	}
 
 	var resBytes []byte

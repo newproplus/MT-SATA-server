@@ -56,7 +56,7 @@ func GetWsBasicInfo() StWsBasicInfo {
 		WsHeartbeatSeconds: Conf.Ws.HeartbeatSeconds,
 		IndNameArr:         IndNameArr,
 		TimeframeMap:       TimePeriodMap,
-		PriceTypeMap:       priceTypeMap,
+		AppliedPriceMap:    appliedPriceMap,
 		ClientStatusMap:    GetClientStatusMap(),
 		EmptytStrSign:      EmptytStrSign,
 	}
@@ -88,7 +88,7 @@ func SaveSymbolSettings(symbol string, indParam StIndParam, priceRange StPriceRa
 	if v, ok := Conf.ClientSettingMap[symbol]; ok {
 		v.IndParam.IndName = indParam.IndName
 		v.IndParam.Period = indParam.Period
-		v.IndParam.PriceType = indParam.PriceType
+		v.IndParam.AppliedPrice = indParam.AppliedPrice
 		v.IndParam.Timeframe = indParam.Timeframe
 		v.IndParam.UpLine = indParam.UpLine
 		v.IndParam.DownLine = indParam.DownLine

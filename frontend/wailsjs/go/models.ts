@@ -4,7 +4,7 @@ export namespace backend {
 	    indName: string;
 	    timeframe: number;
 	    period: number;
-	    priceType: number;
+	    appliedPrice: number;
 	    upLine: number;
 	    downLine: number;
 	
@@ -17,7 +17,7 @@ export namespace backend {
 	        this.indName = source["indName"];
 	        this.timeframe = source["timeframe"];
 	        this.period = source["period"];
-	        this.priceType = source["priceType"];
+	        this.appliedPrice = source["appliedPrice"];
 	        this.upLine = source["upLine"];
 	        this.downLine = source["downLine"];
 	    }
@@ -80,7 +80,7 @@ export namespace backend {
 	    indNameArr: string[];
 	    timeframeMap: {[key: string]: number};
 	    clientStatusMap: {[key: string]: boolean};
-	    priceTypeMap: {[key: string]: number};
+	    appliedPriceMap: {[key: string]: number};
 	    wsPort: number;
 	    wsHeartbeatSeconds: number;
 	    emptytStrSign: string;
@@ -94,7 +94,7 @@ export namespace backend {
 	        this.indNameArr = source["indNameArr"];
 	        this.timeframeMap = source["timeframeMap"];
 	        this.clientStatusMap = source["clientStatusMap"];
-	        this.priceTypeMap = source["priceTypeMap"];
+	        this.appliedPriceMap = source["appliedPriceMap"];
 	        this.wsPort = source["wsPort"];
 	        this.wsHeartbeatSeconds = source["wsHeartbeatSeconds"];
 	        this.emptytStrSign = source["emptytStrSign"];

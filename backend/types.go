@@ -11,15 +11,15 @@ type StReachStd int
 
 type StStringBoolMap = map[string]bool
 type StTimeframeMap = map[string]StMtTimeframe
-type StPriceTypeMap = map[string]StMtAppliedPrice
+type StAppliedPriceMap = map[string]StMtAppliedPrice
 
 type StIndParam struct {
-	IndName   string           `json:"indName"`
-	Timeframe StMtTimeframe    `json:"timeframe"`
-	Period    StMtTimeframe    `json:"period"`
-	PriceType StMtAppliedPrice `json:"priceType"`
-	UpLine    float32          `json:"upLine"`
-	DownLine  float32          `json:"downLine"`
+	IndName      string           `json:"indName"`
+	Timeframe    StMtTimeframe    `json:"timeframe"`
+	Period       StMtTimeframe    `json:"period"`
+	AppliedPrice StMtAppliedPrice `json:"appliedPrice"`
+	UpLine       float32          `json:"upLine"`
+	DownLine     float32          `json:"downLine"`
 }
 
 // Price limit range
@@ -47,13 +47,13 @@ type StSocketClientData struct {
 }
 
 type StWsBasicInfo struct {
-	IndNameArr         []string        `json:"indNameArr"`
-	TimeframeMap       StTimeframeMap  `json:"timeframeMap"`
-	ClientStatusMap    StStringBoolMap `json:"clientStatusMap"`
-	PriceTypeMap       StPriceTypeMap  `json:"priceTypeMap"`
-	WsPort             uint            `json:"wsPort"`
-	WsHeartbeatSeconds uint            `json:"wsHeartbeatSeconds"`
-	EmptytStrSign      string          `json:"emptytStrSign"`
+	IndNameArr         []string          `json:"indNameArr"`
+	TimeframeMap       StTimeframeMap    `json:"timeframeMap"`
+	ClientStatusMap    StStringBoolMap   `json:"clientStatusMap"`
+	AppliedPriceMap    StAppliedPriceMap `json:"appliedPriceMap"`
+	WsPort             uint              `json:"wsPort"`
+	WsHeartbeatSeconds uint              `json:"wsHeartbeatSeconds"`
+	EmptytStrSign      string            `json:"emptytStrSign"`
 }
 
 type ConfigureWindow struct {

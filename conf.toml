@@ -1,6 +1,6 @@
 [Window]
   Width = 1000
-  Height = 600
+  Height = 640
 
 [Ws]
   ServerPort = 60200

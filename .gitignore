@@ -6,3 +6,4 @@ log
 
 # file
 pnpm-lock.yaml
+*.exe

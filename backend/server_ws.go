@@ -20,7 +20,7 @@ func (self *StWsServer) Start() {
 
 	ln, err := net.Listen("tcp", path)
 	if err != nil {
-		Logger.Error("ws Listen error: ", zap.Error(err))
+		Logger.Error("ws server Listen error: ", zap.Error(err))
 	}
 	e := wsflate.Extension{
 		// We are using default parameters here since we use
@@ -86,7 +86,7 @@ func (self *StWsServer) Start() {
 				json.Unmarshal(inBytes, &inData)
 
 				if inData.Action != ActClientHeartbeat {
-					fmt.Printf("ws received(not heartbeat): `%v`\n", inStr)
+					fmt.Printf(">>> ws received(not heartbeat): `%v`\n", inStr)
 				}
 
 				var resBytes []byte

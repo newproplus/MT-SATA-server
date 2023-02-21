@@ -3,7 +3,7 @@ package backend
 var Conf = Configure{
 	Window: ConfigureWindow{
 		Width:  1000,
-		Height: 600,
+		Height: 640,
 	},
 
 	Ws: ConfigureWs{
