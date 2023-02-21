@@ -53,7 +53,7 @@ To build a redistributable, production mode package, use `wails build`.
 
 ### Online payment
 
-![DanteQrCodeImg]([./docs/dante_qr_code.png](https://github.com/newproplus/newproplus/blob/main/images/dante_qr_code.png))
+![DanteQrCodeImg](https://github.com/newproplus/newproplus/blob/main/images/dante_qr_code.png))
 
 ## Trouble shutting
 
